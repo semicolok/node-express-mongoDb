@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	div(data-role='page', id='index')
+		div(data-role='header')
+			h1 #{title}
+
+		div(data-role='content')
+			ul#memolist(data-role='listview', data-inset='true')
+				li
+					a(href='/board') Board
+				li
+					a(href='/chat') ChatServer
+
+		div(data-role='footer', data-position='inline')

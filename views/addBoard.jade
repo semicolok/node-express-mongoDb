@@ -1,0 +1,59 @@
+extends layout
+
+block content 
+	script
+		$(function(){
+			console.log('dfsdfsdfsd');
+
+			var resetForm = function(){
+				$('#title').val('');
+				$('#writer').val('');
+				$('#content').val('');
+			};
+
+			$('#button').click(function(){
+				$.post(
+					'save',
+					{
+						title : $('#title').val(),
+						writer : $('#writer').val(),
+						content : $('#content').val()
+					},
+					function(json){
+						if(json !== null){
+							alert('Data Save Success!');
+							resetForm();
+						} else {
+							alert('Data Save Failed!');
+						}
+					},
+					'json'
+				);
+			});
+
+			$('#backBt').click(function(){
+				$.get('/');
+			});
+		});
+	div(data-role='page', id='index')
+		div(data-role='header')
+			a#backBt(href='#', data-icon='plus', class='ui-btn-left') Back
+			h1 #{title}
+
+		div(data-role='content')
+			table
+				tr
+					td Title
+						td
+							input#title(type='text')
+				tr
+					td Writer
+						td
+							input#writer(type='text')
+				tr
+					td Content
+						td
+							textArea#content
+
+		div(data-role='footer', data-position='inline')
+			a#button(href='#', data-icon='plus', class='ui-btn-left') Save
